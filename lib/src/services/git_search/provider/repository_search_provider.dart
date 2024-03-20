@@ -77,10 +77,11 @@ class SearchRepositories extends _$SearchRepositories {
     return ([], false);
   }
 
+  void clear() => state = ([], false);
+  void _toggleLoading(bool b) => state = (state.$1, b);
+
   void add(List<GithubRepository> list) =>
       state = ([...state.$1, ...list], state.$2);
-  void clear() => state = ([], false);
-  void _toggleLoading() => state = (state.$1, !state.$2);
 
   Future<void> _loadInitialData() async {
     final cache = await ref.read(appCacheProvider.future);
@@ -92,20 +93,19 @@ class SearchRepositories extends _$SearchRepositories {
     }
   }
 
+  void loadMore() {
+    ref.read(pageNumberProvider.notifier).increment();
+    _loadData();
+  }
+
   Future<void> _loadData() async {
     try {
-      _toggleLoading();
+      _toggleLoading(true);
       final res = await ref.read(fetchRepositoryProvider.future);
       add(res);
     } finally {
-      _toggleLoading();
+      _toggleLoading(false);
     }
-  }
-
-  void loadMore() {
-    _toggleLoading();
-    ref.read(pageNumberProvider.notifier).increment();
-    _loadData();
   }
 }
 

@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:git_search/src/pages/home/widgets/repo_card_w.dart';
 import 'package:git_search/src/services/git_search/provider/repository_search_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '/services/routers/app_router.dart';
 import '/src/global/global.dart';
 import 'providers/home_provider.dart';
+import 'widgets/shimmer_card_w.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
@@ -16,7 +18,7 @@ class HomePage extends HookConsumerWidget {
     ref.watch(homePageProvider(isDebug: kDebugMode));
 
     final sort = ref.watch(sortByProvider);
-    final pageNumber = ref.watch(pageNumberProvider);
+    final limit = ref.watch(searchLimitProvider);
     final data = ref.watch(searchRepositoriesProvider);
     final repositories = data.$1;
     final loading = data.$2;
@@ -37,12 +39,12 @@ class HomePage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${context.l10n.appTitle} - ${sort.title} - $pageNumber'),
+        title: Text(context.l10n.appTitle),
         actions: [
           IconButton(
             onPressed: () => const SettingsRoute().push(context),
             icon: const Icon(Icons.settings),
-          )
+          ),
         ],
       ),
       body: RefreshIndicator(
@@ -52,7 +54,7 @@ class HomePage extends HookConsumerWidget {
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.5),
             child: initialLoading
-                ? const Center(child: CircularProgressIndicator())
+                ? ShimmerList(count: limit)
                 : ListView.builder(
                     controller: scrollController,
                     itemCount:
@@ -63,16 +65,12 @@ class HomePage extends HookConsumerWidget {
                         final i = index + 1;
 
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            child: ListTile(
-                              title: Text('$i. ${repo.fullName}'),
-                              trailing: Text('${repo.stargazersCount}'),
-                            ),
-                          ),
+                          padding: const EdgeInsets.all(4.0),
+                          child: RepoCardWidget(repository: repo, index: i),
                         );
                       }
-                      return const Center(child: CircularProgressIndicator());
+
+                      return ShimmerList(count: limit);
                     },
                   )),
       ),
