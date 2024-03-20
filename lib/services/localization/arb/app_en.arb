@@ -1,5 +1,5 @@
 {
-  "appTitle": "Flutter Aurora",
+  "appTitle": "Git Search",
   "@appTitle": { "description": "The title of the application" },
   "homePageTitle": "Home Page",
   "@homePageTitle": { "description": "The title of the home page" },
