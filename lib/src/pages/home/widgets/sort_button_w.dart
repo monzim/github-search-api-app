@@ -12,8 +12,11 @@ class SortingChooseButton extends ConsumerWidget {
     return PopupMenuButton<Sort>(
       enableFeedback: true,
       iconColor: Theme.of(context).colorScheme.primary,
-      icon: Icon(sort.icon),
       tooltip: 'Sort by',
+      icon: CircleAvatar(
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        child: Icon(sort.icon),
+      ),
       itemBuilder: (context) => Sort.values
           .map((e) => PopupMenuItem<Sort>(
                 value: e,

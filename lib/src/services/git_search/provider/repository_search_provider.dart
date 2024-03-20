@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'repository_search_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-class SearTearm extends _$SearTearm {
+class SearchTerm extends _$SearchTerm {
   @override
   String build() {
     return 'Flutter';
@@ -77,7 +77,11 @@ class SearchRepositories extends _$SearchRepositories {
     return ([], false);
   }
 
-  void clear() => state = ([], false);
+  void clear() {
+    state = ([], false);
+    ref.read(appCacheProvider.notifier).reset();
+  }
+
   void _toggleLoading(bool b) => state = (state.$1, b);
 
   void add(List<GithubRepository> list) {
@@ -128,6 +132,13 @@ class SearchRepositories extends _$SearchRepositories {
     _loadData();
   }
 
+  void searchWithTerm(String term) {
+    ref.read(pageNumberProvider.notifier).update(1);
+    ref.read(searchTermProvider.notifier).change(term);
+    clear();
+    _loadData();
+  }
+
   Future<void> _loadData() async {
     try {
       _toggleLoading(true);
@@ -141,7 +152,7 @@ class SearchRepositories extends _$SearchRepositories {
 
 @riverpod
 Future<List<GithubRepository>> fetchRepository(FetchRepositoryRef ref) async {
-  final term = ref.watch(searTearmProvider);
+  final term = ref.watch(searchTermProvider);
   final page = ref.watch(pageNumberProvider);
   final limit = ref.watch(searchLimitProvider);
 

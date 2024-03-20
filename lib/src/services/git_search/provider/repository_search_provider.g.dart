@@ -38,20 +38,20 @@ final fetchRepositoryProvider =
 
 typedef FetchRepositoryRef
     = AutoDisposeFutureProviderRef<List<GithubRepository>>;
-String _$searTearmHash() => r'c3c9612b20353ea6b22b0e46034603dee3adfad0';
+String _$searchTermHash() => r'e2aec4d584ae34c2ab7dbe61a4c834c868707d4a';
 
-/// See also [SearTearm].
-@ProviderFor(SearTearm)
-final searTearmProvider = NotifierProvider<SearTearm, String>.internal(
-  SearTearm.new,
-  name: r'searTearmProvider',
+/// See also [SearchTerm].
+@ProviderFor(SearchTerm)
+final searchTermProvider = NotifierProvider<SearchTerm, String>.internal(
+  SearchTerm.new,
+  name: r'searchTermProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$searTearmHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$searchTermHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SearTearm = Notifier<String>;
+typedef _$SearchTerm = Notifier<String>;
 String _$sortByHash() => r'7c5bf99da02132c7712f37081c9090f6b535ed6f';
 
 /// See also [SortBy].
@@ -95,7 +95,7 @@ final searchLimitProvider = NotifierProvider<SearchLimit, int>.internal(
 
 typedef _$SearchLimit = Notifier<int>;
 String _$searchRepositoriesHash() =>
-    r'198729ac2ecbe589dd8edb3723ad27823f9d2193';
+    r'd847fc725bebdb84ed382c07c9de7e29bb9fdb12';
 
 /// See also [SearchRepositories].
 @ProviderFor(SearchRepositories)
