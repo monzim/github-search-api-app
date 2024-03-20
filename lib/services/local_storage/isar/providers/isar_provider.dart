@@ -1,3 +1,4 @@
+import 'package:git_search/src/services/cache/cache_model.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -14,7 +15,7 @@ class IsarService extends _$IsarService {
 
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(
-        [AppPreferencesSchema],
+        [AppPreferencesSchema, CacheModelSchema],
         directory: dir.path,
         inspector: true,
       );

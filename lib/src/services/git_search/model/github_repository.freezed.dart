@@ -41,11 +41,11 @@ mixin _$GithubRepository {
   @JsonKey(name: 'url')
   String? get url => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  String? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
-  String? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'pushed_at')
-  String? get pushedAt => throw _privateConstructorUsedError;
+  DateTime? get pushedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'git_url')
   String? get gitUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'ssh_url')
@@ -132,9 +132,9 @@ abstract class $GithubRepositoryCopyWith<$Res> {
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'fork') bool? fork,
       @JsonKey(name: 'url') String? url,
-      @JsonKey(name: 'created_at') String? createdAt,
-      @JsonKey(name: 'updated_at') String? updatedAt,
-      @JsonKey(name: 'pushed_at') String? pushedAt,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
+      @JsonKey(name: 'pushed_at') DateTime? pushedAt,
       @JsonKey(name: 'git_url') String? gitUrl,
       @JsonKey(name: 'ssh_url') String? sshUrl,
       @JsonKey(name: 'clone_url') String? cloneUrl,
@@ -274,15 +274,15 @@ class _$GithubRepositoryCopyWithImpl<$Res, $Val extends GithubRepository>
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       pushedAt: freezed == pushedAt
           ? _value.pushedAt
           : pushedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       gitUrl: freezed == gitUrl
           ? _value.gitUrl
           : gitUrl // ignore: cast_nullable_to_non_nullable
@@ -454,9 +454,9 @@ abstract class _$$GithubRepositoryImplCopyWith<$Res>
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'fork') bool? fork,
       @JsonKey(name: 'url') String? url,
-      @JsonKey(name: 'created_at') String? createdAt,
-      @JsonKey(name: 'updated_at') String? updatedAt,
-      @JsonKey(name: 'pushed_at') String? pushedAt,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
+      @JsonKey(name: 'pushed_at') DateTime? pushedAt,
       @JsonKey(name: 'git_url') String? gitUrl,
       @JsonKey(name: 'ssh_url') String? sshUrl,
       @JsonKey(name: 'clone_url') String? cloneUrl,
@@ -596,15 +596,15 @@ class __$$GithubRepositoryImplCopyWithImpl<$Res>
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       pushedAt: freezed == pushedAt
           ? _value.pushedAt
           : pushedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       gitUrl: freezed == gitUrl
           ? _value.gitUrl
           : gitUrl // ignore: cast_nullable_to_non_nullable
@@ -820,13 +820,13 @@ class _$GithubRepositoryImpl extends _GithubRepository {
   final String? url;
   @override
   @JsonKey(name: 'created_at')
-  final String? createdAt;
+  final DateTime? createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  final String? updatedAt;
+  final DateTime? updatedAt;
   @override
   @JsonKey(name: 'pushed_at')
-  final String? pushedAt;
+  final DateTime? pushedAt;
   @override
   @JsonKey(name: 'git_url')
   final String? gitUrl;
@@ -1090,9 +1090,9 @@ abstract class _GithubRepository extends GithubRepository {
       @JsonKey(name: 'description') final String? description,
       @JsonKey(name: 'fork') final bool? fork,
       @JsonKey(name: 'url') final String? url,
-      @JsonKey(name: 'created_at') final String? createdAt,
-      @JsonKey(name: 'updated_at') final String? updatedAt,
-      @JsonKey(name: 'pushed_at') final String? pushedAt,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
+      @JsonKey(name: 'pushed_at') final DateTime? pushedAt,
       @JsonKey(name: 'git_url') final String? gitUrl,
       @JsonKey(name: 'ssh_url') final String? sshUrl,
       @JsonKey(name: 'clone_url') final String? cloneUrl,
@@ -1162,13 +1162,13 @@ abstract class _GithubRepository extends GithubRepository {
   String? get url;
   @override
   @JsonKey(name: 'created_at')
-  String? get createdAt;
+  DateTime? get createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  String? get updatedAt;
+  DateTime? get updatedAt;
   @override
   @JsonKey(name: 'pushed_at')
-  String? get pushedAt;
+  DateTime? get pushedAt;
   @override
   @JsonKey(name: 'git_url')
   String? get gitUrl;

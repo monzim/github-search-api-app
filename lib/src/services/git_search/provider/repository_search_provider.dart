@@ -1,3 +1,4 @@
+import 'package:git_search/src/services/cache/cache_provider.dart';
 import 'package:git_search/src/services/git_search/helper/github_search_helper.dart';
 import 'package:git_search/src/services/git_search/model/enum.dart';
 import 'package:git_search/src/services/git_search/model/github_repository.dart';
@@ -36,8 +37,8 @@ class PageNumber extends _$PageNumber {
     return 1;
   }
 
-  void update(int n) {
-    state = n;
+  void update(int? n) {
+    state = n ?? 1;
   }
 
   void increment() {
@@ -56,8 +57,8 @@ class SearchLimit extends _$SearchLimit {
     return initial;
   }
 
-  void change(int n) {
-    state = n;
+  void change(int? n) {
+    state = n ?? initial;
   }
 }
 
@@ -72,8 +73,8 @@ bool isInitialLoading(IsInitialLoadingRef ref) {
 class SearchRepositories extends _$SearchRepositories {
   @override
   (List<GithubRepository>, bool) build() {
-    _loadData();
-    return ([], true);
+    _loadInitialData();
+    return ([], false);
   }
 
   void add(List<GithubRepository> list) =>
@@ -81,8 +82,19 @@ class SearchRepositories extends _$SearchRepositories {
   void clear() => state = ([], false);
   void _toggleLoading() => state = (state.$1, !state.$2);
 
+  Future<void> _loadInitialData() async {
+    final cache = await ref.read(appCacheProvider.future);
+    final data = AppCache.getAsRepo(cache);
+    add(data);
+
+    if (data.isEmpty) {
+      _loadData();
+    }
+  }
+
   Future<void> _loadData() async {
     try {
+      _toggleLoading();
       final res = await ref.read(fetchRepositoryProvider.future);
       add(res);
     } finally {
@@ -113,5 +125,6 @@ Future<List<GithubRepository>> fetchRepository(FetchRepositoryRef ref) async {
     throw Exception(res.$2);
   }
 
+  ref.read(appCacheProvider.notifier).addData(res.$1, limit: limit, page: page);
   return res.$1;
 }

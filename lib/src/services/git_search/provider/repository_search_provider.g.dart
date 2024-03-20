@@ -21,7 +21,7 @@ final isInitialLoadingProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef IsInitialLoadingRef = AutoDisposeProviderRef<bool>;
-String _$fetchRepositoryHash() => r'97425d08ab9e45a01639e50dc5a110acc50d479a';
+String _$fetchRepositoryHash() => r'6e8c76a4574f50d7225237393831c9fca750f992';
 
 /// See also [fetchRepository].
 @ProviderFor(fetchRepository)
@@ -66,7 +66,7 @@ final sortByProvider = NotifierProvider<SortBy, Sort>.internal(
 );
 
 typedef _$SortBy = Notifier<Sort>;
-String _$pageNumberHash() => r'043c62cbc29c94508a85782ca6d900a762cee5f0';
+String _$pageNumberHash() => r'729468bbaaebb1b3f8bee03652dcc660e4d79bfb';
 
 /// See also [PageNumber].
 @ProviderFor(PageNumber)
@@ -80,7 +80,7 @@ final pageNumberProvider = NotifierProvider<PageNumber, int>.internal(
 );
 
 typedef _$PageNumber = Notifier<int>;
-String _$searchLimitHash() => r'12d8db6ded9961c02378c22ac4d46883df4ecc1a';
+String _$searchLimitHash() => r'9f4c23393106db5479b03f5cf93d2959e233ec50';
 
 /// See also [SearchLimit].
 @ProviderFor(SearchLimit)
@@ -95,7 +95,7 @@ final searchLimitProvider = NotifierProvider<SearchLimit, int>.internal(
 
 typedef _$SearchLimit = Notifier<int>;
 String _$searchRepositoriesHash() =>
-    r'1bca5aa05e93286a12c217eddf51a55eddfaf21a';
+    r'198729ac2ecbe589dd8edb3723ad27823f9d2193';
 
 /// See also [SearchRepositories].
 @ProviderFor(SearchRepositories)

@@ -1,4 +1,5 @@
 import 'dart:convert' show utf8;
+
 import 'package:flutter/foundation.dart' show immutable;
 
 extension ToBinarray on String {
@@ -17,4 +18,5 @@ class IsarDatabeName {
 @immutable
 class IsarConstantsCollections {
   static int appPreferences = 'appPreferences'.toBinary();
+  static int cache = 'cache'.toBinary();
 }

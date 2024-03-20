@@ -21,9 +21,15 @@ _$GithubRepositoryImpl _$$GithubRepositoryImplFromJson(
       description: json['description'] as String?,
       fork: json['fork'] as bool?,
       url: json['url'] as String?,
-      createdAt: json['created_at'] as String?,
-      updatedAt: json['updated_at'] as String?,
-      pushedAt: json['pushed_at'] as String?,
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      pushedAt: json['pushed_at'] == null
+          ? null
+          : DateTime.parse(json['pushed_at'] as String),
       gitUrl: json['git_url'] as String?,
       sshUrl: json['ssh_url'] as String?,
       cloneUrl: json['clone_url'] as String?,
@@ -73,9 +79,9 @@ Map<String, dynamic> _$$GithubRepositoryImplToJson(
       'description': instance.description,
       'fork': instance.fork,
       'url': instance.url,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
-      'pushed_at': instance.pushedAt,
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
+      'pushed_at': instance.pushedAt?.toIso8601String(),
       'git_url': instance.gitUrl,
       'ssh_url': instance.sshUrl,
       'clone_url': instance.cloneUrl,
