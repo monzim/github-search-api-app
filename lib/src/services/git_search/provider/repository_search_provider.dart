@@ -1,12 +1,11 @@
 import 'package:git_search/src/services/git_search/helper/github_search_helper.dart';
 import 'package:git_search/src/services/git_search/model/enum.dart';
 import 'package:git_search/src/services/git_search/model/github_repository.dart';
-import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'repository_search_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class SearTearm extends _$SearTearm {
   @override
   String build() {
@@ -46,19 +45,55 @@ class PageNumber extends _$PageNumber {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class SearchLimit extends _$SearchLimit {
+  static const initial = 10;
+  static const up = 10;
+  static const max = 100;
+
   @override
   int build() {
-    return 10;
+    return initial;
   }
 
-  void increment() {
-    if (state == 1000) {
-      state = 10;
-    } else {
-      state += 10;
+  void change(int n) {
+    state = n;
+  }
+}
+
+@riverpod
+bool isInitialLoading(IsInitialLoadingRef ref) {
+  final page = ref.watch(pageNumberProvider);
+  final loading = ref.watch(searchRepositoriesProvider).$2;
+  return page == 1 && loading;
+}
+
+@Riverpod(keepAlive: true)
+class SearchRepositories extends _$SearchRepositories {
+  @override
+  (List<GithubRepository>, bool) build() {
+    _loadData();
+    return ([], true);
+  }
+
+  void add(List<GithubRepository> list) =>
+      state = ([...state.$1, ...list], state.$2);
+  void clear() => state = ([], false);
+  void _toggleLoading() => state = (state.$1, !state.$2);
+
+  Future<void> _loadData() async {
+    try {
+      final res = await ref.read(fetchRepositoryProvider.future);
+      add(res);
+    } finally {
+      _toggleLoading();
     }
+  }
+
+  void loadMore() {
+    _toggleLoading();
+    ref.read(pageNumberProvider.notifier).increment();
+    _loadData();
   }
 }
 
@@ -75,7 +110,7 @@ Future<List<GithubRepository>> fetchRepository(FetchRepositoryRef ref) async {
       );
 
   if (res.$2 != null) {
-    // TODO: handle error
+    throw Exception(res.$2);
   }
 
   return res.$1;
