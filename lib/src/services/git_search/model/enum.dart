@@ -1,12 +1,15 @@
-enum Sort {
-  stars('Stars', 'stars'),
-  forks('Forks', 'forks'),
-  updated('Updated', 'updated');
+import 'package:flutter/material.dart';
 
-  const Sort(this.title, this.value);
+enum Sort {
+  stars('Stars', 'stars', Icons.star),
+  forks('Forks', 'forks', Icons.call_split),
+  updated('Updated', 'updated', Icons.update);
+
+  const Sort(this.title, this.value, this.icon);
 
   final String title;
   final String value;
+  final IconData icon;
 }
 
 enum Order {

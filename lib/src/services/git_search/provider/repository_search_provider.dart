@@ -80,8 +80,9 @@ class SearchRepositories extends _$SearchRepositories {
   void clear() => state = ([], false);
   void _toggleLoading(bool b) => state = (state.$1, b);
 
-  void add(List<GithubRepository> list) =>
-      state = ([...state.$1, ...list], state.$2);
+  void add(List<GithubRepository> list) {
+    state = ([...state.$1, ...list], state.$2);
+  }
 
   Future<void> _loadInitialData() async {
     final cache = await ref.read(appCacheProvider.future);
@@ -91,6 +92,35 @@ class SearchRepositories extends _$SearchRepositories {
     if (data.isEmpty) {
       _loadData();
     }
+  }
+
+  void sortItems(Sort sort) {
+    final data = state.$1;
+
+    data.sort((a, b) {
+      switch (sort) {
+        case Sort.stars:
+          {
+            final aC = a.stargazersCount ?? 0;
+            final bC = b.stargazersCount ?? 0;
+            return bC.compareTo(aC);
+          }
+        case Sort.forks:
+          {
+            final aC = a.forksCount ?? 0;
+            final bC = b.forksCount ?? 0;
+            return bC.compareTo(aC);
+          }
+        case Sort.updated:
+          {
+            final aC = a.updatedAt?.microsecondsSinceEpoch ?? 0;
+            final bC = b.updatedAt?.microsecondsSinceEpoch ?? 0;
+            return bC.compareTo(aC);
+          }
+      }
+    });
+
+    state = (data, state.$2);
   }
 
   void loadMore() {

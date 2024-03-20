@@ -16,6 +16,7 @@ class RepoCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      key: key,
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: Theme.of(context).colorScheme.primary,
@@ -86,12 +87,10 @@ class RepoCardWidget extends StatelessWidget {
         .animate()
         .fade(duration: 500.ms)
         .slide(
-          duration: 500.ms,
+          duration: 600.ms,
           begin: Offset(index! % 2 == 0 ? -1 : 1, 0),
           end: const Offset(0, 0),
         )
-        .scale(
-          duration: 500.ms,
-        );
+        .scale(duration: 700.ms);
   }
 }
