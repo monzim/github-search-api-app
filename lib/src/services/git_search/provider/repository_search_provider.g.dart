@@ -21,7 +21,7 @@ final isInitialLoadingProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef IsInitialLoadingRef = AutoDisposeProviderRef<bool>;
-String _$fetchRepositoryHash() => r'f7b5d25b56614ee197cb424c82b3e0b83fef8a8b';
+String _$fetchRepositoryHash() => r'e5644909186faac946e64375f7bce5870bc08248';
 
 /// See also [fetchRepository].
 @ProviderFor(fetchRepository)
@@ -187,7 +187,22 @@ class _GetRepoByIdProviderElement
   int? get id => (origin as GetRepoByIdProvider).id;
 }
 
-String _$searchTermHash() => r'e2aec4d584ae34c2ab7dbe61a4c834c868707d4a';
+String _$errorMessageHash() => r'd97c9ae4fd0371b127203a255b736307c568583a';
+
+/// See also [ErrorMessage].
+@ProviderFor(ErrorMessage)
+final errorMessageProvider =
+    AutoDisposeNotifierProvider<ErrorMessage, String?>.internal(
+  ErrorMessage.new,
+  name: r'errorMessageProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$errorMessageHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ErrorMessage = AutoDisposeNotifier<String?>;
+String _$searchTermHash() => r'23fc0d7eb871b740bfadc4fa2d3d3a39acbe0543';
 
 /// See also [SearchTerm].
 @ProviderFor(SearchTerm)

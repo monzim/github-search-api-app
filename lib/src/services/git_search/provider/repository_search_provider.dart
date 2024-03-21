@@ -6,6 +6,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'repository_search_provider.g.dart';
 
+@riverpod
+class ErrorMessage extends _$ErrorMessage {
+  @override
+  String? build() {
+    return null;
+  }
+
+  void change(String? s) {
+    state = s;
+  }
+}
+
 @Riverpod(keepAlive: true)
 class SearchTerm extends _$SearchTerm {
   static const initial = 'Flutter';
@@ -165,9 +177,11 @@ Future<List<GithubRepository>> fetchRepository(FetchRepositoryRef ref) async {
       );
 
   if (res.$2 != null) {
-    throw Exception(res.$2);
+    // ignore: avoid_manual_providers_as_generated_provider_dependency
+    ref.read(errorMessageProvider.notifier).change(res.$2);
   }
 
+// save to cache
   ref.read(appCacheProvider.notifier).addData(
         res.$1,
         limit: limit,

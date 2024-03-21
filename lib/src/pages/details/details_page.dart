@@ -207,6 +207,31 @@ class DetailsPage extends ConsumerWidget {
                     ),
                   ],
                 ),
+                if (repo.license != null) ...[
+                  const SizedBox(height: 10.0),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.description,
+                        size: 15,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      const SizedBox(width: 3.0),
+                      Text(
+                        'License: ',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                      ),
+                      Text(
+                        repo.license!.name ?? 'No license',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                      ),
+                    ],
+                  ),
+                ],
                 const SizedBox(height: 10.0),
                 Row(
                   children: <Widget>[

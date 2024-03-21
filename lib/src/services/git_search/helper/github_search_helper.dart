@@ -31,17 +31,24 @@ class GithubSearchRepository with GithubSearchEndpoints {
     Sort sort = Sort.stars,
     Order order = Order.desc,
   }) async {
-    final response = await _http.get(
-        '$searchEndpoint?q=$query&sort=${sort.value}&order=${order.value}&page=$page&per_page=$perPage');
+    try {
+      final response = await _http.get(
+          '$searchEndpoint?q=$query&sort=${sort.value}&order=${order.value}&page=$page&per_page=$perPage');
 
-    final json = jsonDecode(response.body);
+      final json = jsonDecode(response.body);
 
-    if (response.statusCode != 200) {
-      final message = json['message'] as String;
-      return (<GithubRepository>[], message);
+      if (response.statusCode != 200) {
+        final message = json['message'] as String;
+        return (<GithubRepository>[], message);
+      }
+
+      final res = ApiResponse.fromJson(json);
+      return (res.items, null);
+    } catch (e) {
+      return (
+        <GithubRepository>[],
+        'An error occurred while fetching data. With error: $e'
+      );
     }
-
-    final res = ApiResponse.fromJson(json);
-    return (res.items, null);
   }
 }
