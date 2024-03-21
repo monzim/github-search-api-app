@@ -17,6 +17,13 @@ GithubSearchRepository githubSearchRepository(GithubSearchRepositoryRef ref) {
   return GithubSearchRepository(apiService: apiService);
 }
 
+/*
+  --------------------------------
+  GithubSearchRepository using the GithubSearchEndpoints
+  We can use the GithubSearchEndpoints to get the endpoints for the Github API. Also this 
+  is flexible to add more endpoints in the future.
+  --------------------------------
+ */
 class GithubSearchRepository with GithubSearchEndpoints {
   final ApiService _http;
 

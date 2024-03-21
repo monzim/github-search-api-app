@@ -169,6 +169,11 @@ class SearchRepositories extends _$SearchRepositories {
     }
   }
 
+/*
+  --------------------------------
+  Revalidate the data after 30 minutes
+  --------------------------------
+ */
   void revalidate() {
     Timer(const Duration(minutes: 30), () {
       clear();
@@ -181,6 +186,11 @@ class SearchRepositories extends _$SearchRepositories {
 
 @riverpod
 Future<List<GithubRepository>> fetchRepository(FetchRepositoryRef ref) async {
+  /*
+  --------------------------------
+  Have the option to choose search term, page number, and limit.
+  --------------------------------
+ */
   final term = ref.watch(searchTermProvider);
   final page = ref.watch(pageNumberProvider);
   final limit = ref.watch(searchLimitProvider);
@@ -193,10 +203,20 @@ Future<List<GithubRepository>> fetchRepository(FetchRepositoryRef ref) async {
 
   if (res.$2 != null) {
     // ignore: avoid_manual_providers_as_generated_provider_dependency
+    /*
+  --------------------------------
+  Using the manual provider to change the error message. 
+  Also this provider is not breaking the dependency graph.
+  --------------------------------
+ */
     ref.read(errorMessageProvider.notifier).change(res.$2);
   }
 
-// save to cache
+  /*
+  --------------------------------
+  Save the data to the cache using the help of the appCacheProvider
+  --------------------------------
+ */
   ref.read(appCacheProvider.notifier).addData(
         res.$1,
         limit: limit,

@@ -15,6 +15,13 @@ class AppCache extends _$AppCache {
   Future<CacheModel> build() async {
     final cache = await _getData();
 
+    /*
+  --------------------------------
+  Setting the default value of the search term, limit and page number. This can be also done 
+  in a specific screen or provider. But for this example, I am setting it here. cause this app only have a 
+  single type of data need to be cached. And this provider only have a single responsibility.
+  --------------------------------
+ */
     ref.read(searchTermProvider.notifier).change(cache.searchQuery);
     ref.read(searchLimitProvider.notifier).change(cache.perPage);
     ref.read(pageNumberProvider.notifier).update(cache.lastPage);
