@@ -38,7 +38,7 @@ final fetchRepositoryProvider =
 
 typedef FetchRepositoryRef
     = AutoDisposeFutureProviderRef<List<GithubRepository>>;
-String _$getRepoByIdHash() => r'e176f24b83bf1784a8d9a91fe39daa46429529d8';
+String _$getRepoByIdHash() => r'4b73cee0389200cb2ef79d691f2c7240381730e1';
 
 /// Copied from Dart SDK
 class _SystemHash {

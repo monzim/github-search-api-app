@@ -8,13 +8,15 @@ part 'repository_search_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class SearchTerm extends _$SearchTerm {
+  static const initial = 'Flutter';
+
   @override
   String build() {
-    return 'Flutter';
+    return initial;
   }
 
-  void change(String s) {
-    state = s;
+  void change(String? s) {
+    state = s ?? initial;
   }
 }
 
@@ -166,7 +168,13 @@ Future<List<GithubRepository>> fetchRepository(FetchRepositoryRef ref) async {
     throw Exception(res.$2);
   }
 
-  ref.read(appCacheProvider.notifier).addData(res.$1, limit: limit, page: page);
+  ref.read(appCacheProvider.notifier).addData(
+        res.$1,
+        limit: limit,
+        page: page,
+        query: term,
+      );
+
   return res.$1;
 }
 

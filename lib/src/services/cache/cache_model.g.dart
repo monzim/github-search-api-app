@@ -36,6 +36,11 @@ const CacheModelSchema = CollectionSchema(
       id: 3,
       name: r'perPage',
       type: IsarType.long,
+    ),
+    r'searchQuery': PropertySchema(
+      id: 4,
+      name: r'searchQuery',
+      type: IsarType.string,
     )
   },
   estimateSize: _cacheModelEstimateSize,
@@ -64,6 +69,12 @@ int _cacheModelEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  {
+    final value = object.searchQuery;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -77,6 +88,7 @@ void _cacheModelSerialize(
   writer.writeLong(offsets[1], object.lastPage);
   writer.writeDateTime(offsets[2], object.lastUpdated);
   writer.writeLong(offsets[3], object.perPage);
+  writer.writeString(offsets[4], object.searchQuery);
 }
 
 CacheModel _cacheModelDeserialize(
@@ -91,6 +103,7 @@ CacheModel _cacheModelDeserialize(
   object.lastPage = reader.readLongOrNull(offsets[1]);
   object.lastUpdated = reader.readDateTimeOrNull(offsets[2]);
   object.perPage = reader.readLongOrNull(offsets[3]);
+  object.searchQuery = reader.readStringOrNull(offsets[4]);
   return object;
 }
 
@@ -109,6 +122,8 @@ P _cacheModelDeserializeProp<P>(
       return (reader.readDateTimeOrNull(offset)) as P;
     case 3:
       return (reader.readLongOrNull(offset)) as P;
+    case 4:
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -619,6 +634,160 @@ extension CacheModelQueryFilter
       ));
     });
   }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'searchQuery',
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'searchQuery',
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'searchQuery',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'searchQuery',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'searchQuery',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'searchQuery',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'searchQuery',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'searchQuery',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'searchQuery',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'searchQuery',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'searchQuery',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterFilterCondition>
+      searchQueryIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'searchQuery',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension CacheModelQueryObject
@@ -674,6 +843,18 @@ extension CacheModelQuerySortBy
   QueryBuilder<CacheModel, CacheModel, QAfterSortBy> sortByPerPageDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'perPage', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterSortBy> sortBySearchQuery() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchQuery', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterSortBy> sortBySearchQueryDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchQuery', Sort.desc);
     });
   }
 }
@@ -739,6 +920,18 @@ extension CacheModelQuerySortThenBy
       return query.addSortBy(r'perPage', Sort.desc);
     });
   }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterSortBy> thenBySearchQuery() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchQuery', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QAfterSortBy> thenBySearchQueryDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchQuery', Sort.desc);
+    });
+  }
 }
 
 extension CacheModelQueryWhereDistinct
@@ -765,6 +958,13 @@ extension CacheModelQueryWhereDistinct
   QueryBuilder<CacheModel, CacheModel, QDistinct> distinctByPerPage() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'perPage');
+    });
+  }
+
+  QueryBuilder<CacheModel, CacheModel, QDistinct> distinctBySearchQuery(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'searchQuery', caseSensitive: caseSensitive);
     });
   }
 }
@@ -798,6 +998,12 @@ extension CacheModelQueryProperty
   QueryBuilder<CacheModel, int?, QQueryOperations> perPageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'perPage');
+    });
+  }
+
+  QueryBuilder<CacheModel, String?, QQueryOperations> searchQueryProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'searchQuery');
     });
   }
 }

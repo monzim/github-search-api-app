@@ -19,10 +19,9 @@ class HomePage extends HookConsumerWidget {
     ref.watch(homePageProvider(isDebug: kDebugMode));
     final searchTerm = ref.watch(searchTermProvider);
 
-    final scrollController = useScrollController();
-    final contoller =
-        useTextEditingController(text: ref.read(searchTermProvider));
     final scrollPosition = useState<double?>(null);
+    final scrollController = useScrollController();
+    final contoller = useTextEditingController();
 
     final limit = ref.watch(searchLimitProvider);
     final data = ref.watch(searchRepositoriesProvider);
@@ -33,6 +32,12 @@ class HomePage extends HookConsumerWidget {
 
     final showScrollToTop =
         scrollPosition.value != null && scrollPosition.value! > 600;
+
+    ref.listen(searchTermProvider, (previous, next) {
+      if (previous != next) {
+        contoller.text = next;
+      }
+    });
 
     void scrollToTop() {
       scrollController.animateTo(

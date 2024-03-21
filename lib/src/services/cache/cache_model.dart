@@ -12,4 +12,5 @@ class CacheModel {
   int? perPage;
 
   String? json;
+  String? searchQuery;
 }

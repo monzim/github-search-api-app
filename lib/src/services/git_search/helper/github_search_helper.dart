@@ -31,9 +31,6 @@ class GithubSearchRepository with GithubSearchEndpoints {
     Sort sort = Sort.stars,
     Order order = Order.desc,
   }) async {
-    print('PageNumber: $page');
-    print('Per page: $perPage');
-
     final response = await _http.get(
         '$searchEndpoint?q=$query&sort=${sort.value}&order=${order.value}&page=$page&per_page=$perPage');
 
@@ -45,8 +42,6 @@ class GithubSearchRepository with GithubSearchEndpoints {
     }
 
     final res = ApiResponse.fromJson(json);
-    print('Total count: ${res.totalCount}');
-    print('Items count: ${res.items.length}');
     return (res.items, null);
   }
 }

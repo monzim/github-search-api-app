@@ -15,8 +15,10 @@ class AppCache extends _$AppCache {
   Future<CacheModel> build() async {
     final cache = await _getData();
 
-    ref.read(pageNumberProvider.notifier).update(cache.lastPage);
+    ref.read(searchTermProvider.notifier).change(cache.searchQuery);
     ref.read(searchLimitProvider.notifier).change(cache.perPage);
+    ref.read(pageNumberProvider.notifier).update(cache.lastPage);
+
     return cache;
   }
 
@@ -37,6 +39,7 @@ class AppCache extends _$AppCache {
     List<GithubRepository> data, {
     required int limit,
     required int page,
+    String? query,
   }) async {
     final prev = await _getData();
 
@@ -62,6 +65,7 @@ class AppCache extends _$AppCache {
     prev.lastUpdated = DateTime.now();
     prev.lastPage = page;
     prev.perPage = limit;
+    prev.searchQuery = query;
 
     _update(prev);
   }
