@@ -73,6 +73,7 @@ class SearchLimit extends _$SearchLimit {
 
   void change(int? n) {
     state = n ?? initial;
+    ref.read(appCacheProvider.notifier).updateSearchLimit(n ?? initial);
   }
 }
 

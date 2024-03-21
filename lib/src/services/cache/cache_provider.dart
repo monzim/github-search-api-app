@@ -22,6 +22,15 @@ class AppCache extends _$AppCache {
     return cache;
   }
 
+  void updateSearchLimit(int limit) {
+    final cache = state.value;
+
+    if (cache != null) {
+      cache.perPage = limit;
+      _update(cache);
+    }
+  }
+
   static List<GithubRepository> getAsRepo(CacheModel cache) {
     late List<GithubRepository> list = [];
     if (cache.json != null) {

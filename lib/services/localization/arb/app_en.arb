@@ -1,36 +1,59 @@
 {
+  "itemsPerPage": "Items Per Page",
+  "sortBy": "Sort By",
+  "cacheCleared": "Cache Cleared",
+  "clear": "Clear",
+  "cancel": "Cancel",
+  "clearCache": "Clear Cache",
+  "clearCacheMessage": "Are you sure you want to clear the cache?",
   "appTitle": "Git Search",
-  "@appTitle": { "description": "The title of the application" },
+  "@appTitle": {
+    "description": "The title of the application"
+  },
   "homePageTitle": "Home Page",
-  "@homePageTitle": { "description": "The title of the home page" },
-
+  "@homePageTitle": {
+    "description": "The title of the home page"
+  },
   "settingsPageTitle": "Settings",
-  "@settingsPageTitle": { "description": "The title of the settings page" },
-
+  "@settingsPageTitle": {
+    "description": "The title of the settings page"
+  },
   "settingsPageLanguage": "Language",
-  "@settingsPageLanguage":
-    { "description": "The title of the language setting" },
-
+  "@settingsPageLanguage": {
+    "description": "The title of the language setting"
+  },
   "themeSetting": "Theme",
-  "@themeSetting": { "description": "The title of the theme setting" },
+  "@themeSetting": {
+    "description": "The title of the theme setting"
+  },
   "bangla": "বাংলা",
-  "@bangla": { "description": "The title of the bangla language" },
-
+  "@bangla": {
+    "description": "The title of the bangla language"
+  },
   "english": "English",
-  "@english": { "description": "The title of the english language" },
-
+  "@english": {
+    "description": "The title of the english language"
+  },
   "switchLanguage": "Switch Language",
-  "@SwitchLanguage":
-    { "description": "The title of the switch language button" },
+  "@SwitchLanguage": {
+    "description": "The title of the switch language button"
+  },
   "switchTheme": "Switch Theme",
-  "@SwitchTheme": { "description": "The title of the switch theme button" },
+  "@SwitchTheme": {
+    "description": "The title of the switch theme button"
+  },
   "changeFont": "Change Font",
-  "@ChangeFont": { "description": "The title of the change font button" },
+  "@ChangeFont": {
+    "description": "The title of the change font button"
+  },
   "changeColor": "Change Color",
-  "@ChangeColor": { "description": "The title of the change color button" },
+  "@ChangeColor": {
+    "description": "The title of the change color button"
+  },
   "reset": "Reset",
-  "@Reset": { "description": "The title of the reset button" },
-
+  "@Reset": {
+    "description": "The title of the reset button"
+  },
   "heyThere": "Hey there!",
   "iAmAzrafAlMonzim": "I am Azraf Al Monzim",
   "templateShortDescription": "This is a starter template for my Flutter projects. It uses Riverpod for state management and use GoRouter for routing. It also uses the following",

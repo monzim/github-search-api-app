@@ -1,4 +1,11 @@
 {
+  "itemsPerPage": "প্রতি পৃষ্ঠা আইটেম",
+  "sortBy": "ক্রমানুসার",
+  "cacheCleared": "ক্যাশ মুছে দেয়া হয়েছে",
+  "clear": "পরিষ্কার করুন",
+  "cancel": "বাতিল করুন",
+  "clearCache": "ক্যাশ মুছুন",
+  "clearCacheMessage": "আপনি কি নিশ্চিত যে আপনি ক্যাশ মুছতে চান?",
   "appTitle": "গিট সার্চ",
   "@appTitle": { "description": "আবেদনের শিরোনাম" },
   "homePageTitle": "হোমপেজ",
