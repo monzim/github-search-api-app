@@ -50,13 +50,16 @@ class HomePage extends HookConsumerWidget {
     }, [scrollController]);
 
     return Scaffold(
-      body: CustomScrollView(
-        controller: scrollController,
-        slivers: [
-          SearchBarSection(contoller: contoller),
-          const SliverToBoxAdapter(child: SizedBox(height: 6)),
-          const ResultSection()
-        ],
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: CustomScrollView(
+          controller: scrollController,
+          slivers: [
+            SearchBarSection(contoller: contoller),
+            const SliverToBoxAdapter(child: SizedBox(height: 6)),
+            const ResultSection()
+          ],
+        ),
       ),
       floatingActionButton: !showScrollToTop
           ? null

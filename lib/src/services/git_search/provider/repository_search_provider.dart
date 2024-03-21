@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:git_search/src/services/cache/cache_provider.dart';
 import 'package:git_search/src/services/git_search/helper/github_search_helper.dart';
 import 'package:git_search/src/services/git_search/model/enum.dart';
@@ -89,11 +91,14 @@ class SearchRepositories extends _$SearchRepositories {
   @override
   (List<GithubRepository>, bool) build() {
     _loadInitialData();
+    revalidate();
+
     return ([], false);
   }
 
   void clear() {
     state = ([], false);
+    ref.invalidate(pageNumberProvider);
     ref.read(appCacheProvider.notifier).reset();
   }
 
@@ -162,6 +167,15 @@ class SearchRepositories extends _$SearchRepositories {
     } finally {
       _toggleLoading(false);
     }
+  }
+
+  void revalidate() {
+    Timer(const Duration(minutes: 30), () {
+      clear();
+      _loadInitialData();
+
+      ref.read(searchRepositoriesProvider.notifier).revalidate();
+    });
   }
 }
 

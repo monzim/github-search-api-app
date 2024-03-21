@@ -16,7 +16,7 @@ class SearchBarSection extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SliverAppBar(
       title: SearchBar(
-        hintText: 'Search',
+        hintText: context.l10n.search,
         controller: contoller,
         elevation: MaterialStateProperty.all<double>(1),
         onSubmitted: (value) {
