@@ -169,3 +169,13 @@ Future<List<GithubRepository>> fetchRepository(FetchRepositoryRef ref) async {
   ref.read(appCacheProvider.notifier).addData(res.$1, limit: limit, page: page);
   return res.$1;
 }
+
+@riverpod
+GithubRepository? getRepoById(GetRepoByIdRef ref, int? id) {
+  final data = ref.watch(searchRepositoriesProvider).$1;
+  if (id == null) {
+    return null;
+  }
+
+  return data.firstWhere((e) => e.id == id);
+}

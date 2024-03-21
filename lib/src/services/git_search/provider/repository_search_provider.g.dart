@@ -21,7 +21,7 @@ final isInitialLoadingProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef IsInitialLoadingRef = AutoDisposeProviderRef<bool>;
-String _$fetchRepositoryHash() => r'6e8c76a4574f50d7225237393831c9fca750f992';
+String _$fetchRepositoryHash() => r'f7b5d25b56614ee197cb424c82b3e0b83fef8a8b';
 
 /// See also [fetchRepository].
 @ProviderFor(fetchRepository)
@@ -38,6 +38,155 @@ final fetchRepositoryProvider =
 
 typedef FetchRepositoryRef
     = AutoDisposeFutureProviderRef<List<GithubRepository>>;
+String _$getRepoByIdHash() => r'e176f24b83bf1784a8d9a91fe39daa46429529d8';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+/// See also [getRepoById].
+@ProviderFor(getRepoById)
+const getRepoByIdProvider = GetRepoByIdFamily();
+
+/// See also [getRepoById].
+class GetRepoByIdFamily extends Family<GithubRepository?> {
+  /// See also [getRepoById].
+  const GetRepoByIdFamily();
+
+  /// See also [getRepoById].
+  GetRepoByIdProvider call(
+    int? id,
+  ) {
+    return GetRepoByIdProvider(
+      id,
+    );
+  }
+
+  @override
+  GetRepoByIdProvider getProviderOverride(
+    covariant GetRepoByIdProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getRepoByIdProvider';
+}
+
+/// See also [getRepoById].
+class GetRepoByIdProvider extends AutoDisposeProvider<GithubRepository?> {
+  /// See also [getRepoById].
+  GetRepoByIdProvider(
+    int? id,
+  ) : this._internal(
+          (ref) => getRepoById(
+            ref as GetRepoByIdRef,
+            id,
+          ),
+          from: getRepoByIdProvider,
+          name: r'getRepoByIdProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getRepoByIdHash,
+          dependencies: GetRepoByIdFamily._dependencies,
+          allTransitiveDependencies:
+              GetRepoByIdFamily._allTransitiveDependencies,
+          id: id,
+        );
+
+  GetRepoByIdProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+  }) : super.internal();
+
+  final int? id;
+
+  @override
+  Override overrideWith(
+    GithubRepository? Function(GetRepoByIdRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetRepoByIdProvider._internal(
+        (ref) => create(ref as GetRepoByIdRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        id: id,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<GithubRepository?> createElement() {
+    return _GetRepoByIdProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetRepoByIdProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin GetRepoByIdRef on AutoDisposeProviderRef<GithubRepository?> {
+  /// The parameter `id` of this provider.
+  int? get id;
+}
+
+class _GetRepoByIdProviderElement
+    extends AutoDisposeProviderElement<GithubRepository?> with GetRepoByIdRef {
+  _GetRepoByIdProviderElement(super.provider);
+
+  @override
+  int? get id => (origin as GetRepoByIdProvider).id;
+}
+
 String _$searchTermHash() => r'e2aec4d584ae34c2ab7dbe61a4c834c868707d4a';
 
 /// See also [SearchTerm].
@@ -95,7 +244,7 @@ final searchLimitProvider = NotifierProvider<SearchLimit, int>.internal(
 
 typedef _$SearchLimit = Notifier<int>;
 String _$searchRepositoriesHash() =>
-    r'd847fc725bebdb84ed382c07c9de7e29bb9fdb12';
+    r'0f2d86ba63a45af27f5d6d9064cafd11c04941a6';
 
 /// See also [SearchRepositories].
 @ProviderFor(SearchRepositories)

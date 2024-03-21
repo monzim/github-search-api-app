@@ -9,6 +9,7 @@ part of 'app_router.dart';
 List<RouteBase> get $appRoutes => [
       $homeRoute,
       $settingsRoute,
+      $detailsPageRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
@@ -43,6 +44,30 @@ extension $SettingsRouteExtension on SettingsRoute {
 
   String get location => GoRouteData.$location(
         '/settings',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $detailsPageRoute => GoRouteData.$route(
+      path: '/details/:id',
+      factory: $DetailsPageRouteExtension._fromState,
+    );
+
+extension $DetailsPageRouteExtension on DetailsPageRoute {
+  static DetailsPageRoute _fromState(GoRouterState state) => DetailsPageRoute(
+        id: int.parse(state.pathParameters['id']!),
+      );
+
+  String get location => GoRouteData.$location(
+        '/details/${Uri.encodeComponent(id.toString())}',
       );
 
   void go(BuildContext context) => context.go(location);

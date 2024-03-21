@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:git_search/src/global/global.dart';
-import 'package:git_search/src/services/git_search/model/github_repository.dart';
+
+import '/services/routers/app_router.dart';
+import '/src/global/global.dart';
+import '/src/services/git_search/model/github_repository.dart';
 
 class RepoCardWidget extends StatelessWidget {
   const RepoCardWidget({
@@ -18,6 +20,11 @@ class RepoCardWidget extends StatelessWidget {
     return Card(
       key: key,
       child: ListTile(
+        onTap: () {
+          if (repository.id != null) {
+            DetailsPageRoute(id: repository.id!).push(context);
+          }
+        },
         leading: CircleAvatar(
           backgroundColor: Theme.of(context).colorScheme.primary,
           child: Text(
