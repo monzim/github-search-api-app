@@ -28,10 +28,19 @@ A simple app using the GitHub API to search for repositories. Use the search bar
 - Dark mode support
 - Font customization
 - Name route navigation with [go_router](https://pub.dev/packages/go_router)
+- Flavor support for different environments
+
+## App Flavor
+
+For different environments, I have created different flavors. We can change the environment by changing the flavor. The flavors are:
+
+- [x] [Development](lib/main_development.dart)
+- [x] [Production](lib/main_production.dart)
 
 ## Device Support
 
--[x] Android -[x] iOS
+- [x] Android
+- [x] iOS
 
 ## Technical Details
 
@@ -53,13 +62,21 @@ You can use [mason](https://pub.dev/packages/mason) to get started with _aurora_
 
 # Screenshots
 
-| Screenshot 1                                                                                                            | Screenshot 2                                                                                                            | Screenshot 3                                                                                                            |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| ![Screenshot 1](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.38.41.png)  | ![Screenshot 2](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.39.08.png)  | ![Screenshot 3](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.39.14.png)  |
-| ![Screenshot 4](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.39.18.png)  | ![Screenshot 5](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.39.22.png)  | ![Screenshot 6](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.39.30.png)  |
-| ![Screenshot 7](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.39.35.png)  |                                                                                                                         | ![Screenshot 9](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.40.33.png)  |
-| ![Screenshot 10](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.40.49.png) | ![Screenshot 11](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.40.53.png) | ![Screenshot 12](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.41.12.png) |
-| ![Screenshot 13](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.41.17.png) | ![Screenshot 14](docs/images/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-03-21%20at%2023.41.36.png) |                                                                                                                         |
+| Development Screenshots       | Production Screenshots        |
+| ----------------------------- | ----------------------------- |
+| ![1d.png](docs/images/1d.png) | ![1p.png](docs/images/1p.png) |
+| ![4d.png](docs/images/4d.png) | ![3p.png](docs/images/3p.png) |
+| ![3d.png](docs/images/3d.png) | ![4p.png](docs/images/4p.png) |
+| ![5d.png](docs/images/5d.png) | ![5p.png](docs/images/5p.png) |
+| ![6d.png](docs/images/6d.png) | ![6p.png](docs/images/6p.png) |
+| ![2d.png](docs/images/2d.png) | ![2p.png](docs/images/2p.png) |
+
+**Note:**
+
+- Files with the suffix "p" are screenshots of the product app.
+- Files with the suffix "d" are screenshots of the development version of the app.
+
+Feel free to browse through the screenshots for reference or documentation purposes.
 
 ## Project Structure
 
