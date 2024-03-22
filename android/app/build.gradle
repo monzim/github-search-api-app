@@ -58,6 +58,19 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        prod {
+            resValue "string", "app_name", "Git Search"
+        }
+
+        dev {
+            resValue "string", "app_name", "Git Search Dev"
+            applicationIdSuffix ".dev"
+        }
+    }
 }
 
 flutter {

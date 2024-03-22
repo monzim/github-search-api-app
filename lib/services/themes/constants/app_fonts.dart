@@ -17,5 +17,6 @@ class AppFonts {
     GoogleFonts.ptSans().fontFamily,
     GoogleFonts.ptSerif().fontFamily,
     GoogleFonts.robotoCondensed().fontFamily,
+    GoogleFonts.quicksand().fontFamily
   ];
 }

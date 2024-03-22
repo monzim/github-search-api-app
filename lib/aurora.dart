@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:git_search/common_setting.dart';
 
 import '/src/pages/splash/splash_scree.dart';
 import 'services/app_preference/providers/app_settings_provider.dart';
@@ -11,28 +10,6 @@ import 'services/routers/router_provider.dart';
 import 'services/themes/helpers/dark_mode/dark_mode_helper.dart';
 import 'services/themes/helpers/light_mode/light_mode_helper.dart';
 import 'services/themes/providers/theme_mode_provider.dart';
-
-void main() {
-  runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    /* 
-    --------------------------------
-    Can do any async operation here
-    and to check error while processing the async operation using the runZonedGuarded
-    --------------------------------
-  */
-
-    runApp(
-      const ProviderScope(
-        child: Initializer(),
-      ),
-    );
-  }, (error, stack) {
-    debugPrint('runZonedGuarded: Caught error in my root zone.');
-    debugPrint(stack.toString());
-  });
-}
 
 class Initializer extends ConsumerWidget {
   const Initializer({super.key});
@@ -45,7 +22,6 @@ class Initializer extends ConsumerWidget {
       skipLoadingOnRefresh: true,
       data: (value) => const AuroraApp(),
       loading: () => const SplashScreen(),
-      // ignoreing the error and stack because
       error: (error, stack) => const AuroraApp(),
     );
   }
@@ -69,7 +45,8 @@ class AuroraApp extends ConsumerWidget {
     final locale = ref.watch(appLocalizationServiceProvider);
 
     return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner:
+          GlobalSettings.appFlavor == AppFlavor.development,
       routerConfig: routerConfig,
       themeMode: themeMode,
       theme: ref.watch(lightThemeProvider),

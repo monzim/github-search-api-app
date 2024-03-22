@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
+import 'package:git_search/common_setting.dart';
 import 'package:git_search/src/pages/home/widgets/sort_button_w.dart';
 import 'package:git_search/src/services/git_search/provider/repository_search_provider.dart';
 
@@ -67,6 +68,21 @@ class SettingsPage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            GlobalSettings.appFlavor != AppFlavor.production
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Warning this is a ${GlobalSettings.appFlavor.name} build',
+                      style: TextStyle(
+                        letterSpacing: 1.2,
+                        fontSize: 10.0,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.error,
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
+
             // Appearance settings
             ListTile(
               title: Text(context.l10n.switchTheme),

@@ -1,18 +1,11 @@
-import 'package:flutter/material.dart' show Color, Colors, Locale, immutable;
-import 'package:google_fonts/google_fonts.dart' show GoogleFonts;
-
-import '/services/localization/providers/localization_provider.dart';
+import 'package:flutter/material.dart' show Color, Locale, immutable;
+import 'package:git_search/common_setting.dart';
 
 @immutable
 class AppDefaultSettings {
-  static bool get isDarkMode => _isDarkMode;
-  static bool get isSystemThemeMode => _isSystemThemeMode;
-  static Locale get locale => _locale;
-  static String? get fontFamily => GoogleFonts.ubuntu().fontFamily;
-  static Color get colorSchemeSeed => _colorSchemeSeed;
-
-  static const _isDarkMode = false;
-  static const _isSystemThemeMode = true;
-  static const _locale = AppLocales.enUS;
-  static const _colorSchemeSeed = Colors.indigo;
+  static bool get isDarkMode => GlobalSettings.isDarkMode;
+  static bool get isSystemThemeMode => GlobalSettings.isSystemThemeMode;
+  static Locale get locale => GlobalSettings.locale;
+  static Color get colorSchemeSeed => GlobalSettings.colorSchemeSeed;
+  static String? get fontFamily => GlobalSettings.fontFamily;
 }
